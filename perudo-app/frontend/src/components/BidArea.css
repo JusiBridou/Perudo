@@ -1,0 +1,120 @@
+.bid-area {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  padding: 25px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.bid-area h3 {
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.bid-controls {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.control-group label {
+  font-size: 0.9em;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.control-group input,
+.control-group select {
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 8px;
+  min-width: 120px;
+}
+
+.control-group input::placeholder,
+.control-group select {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.control-group input:focus,
+.control-group select:focus {
+  outline: none;
+  border-color: white;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.control-group input::-webkit-outer-spin-button,
+.control-group input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.bid-preview {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.bid-preview p {
+  margin: 0;
+  font-size: 1.1em;
+}
+
+.bid-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-bid,
+.btn-dudo {
+  padding: 15px 30px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-bid {
+  background: #FF8C42;
+  color: white;
+}
+
+.btn-bid:hover {
+  background: #FF6B35;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-dudo {
+  background: #FF6B35;
+  color: white;
+}
+
+.btn-dudo:hover:not(:disabled) {
+  background: #FF8C42;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-dudo:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
