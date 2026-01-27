@@ -1,25 +1,31 @@
 package com.perudo.api;
 
-import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @Controller
-public class SpaController implements ErrorController {
+public class SpaController {
 
-    @GetMapping("/")
-    public String index() {
-        return "forward:/index.html";
+    @GetMapping(value = "/", produces = MediaType.TEXT_HTML_VALUE)
+    @ResponseBody
+    public String index() throws IOException {
+        Resource resource = new ClassPathResource("public/index.html");
+        return StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
     }
 
-    @RequestMapping("/error")
-    public String handleError() {
-        return "forward:/index.html";
-    }
-
-    public String getErrorPath() {
-        return "/error";
+    @GetMapping(value = "/error", produces = MediaType.TEXT_HTML_VALUE)
+    @ResponseBody
+    public String error() throws IOException {
+        return index();
     }
 }
 
