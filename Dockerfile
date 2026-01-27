@@ -13,6 +13,9 @@ WORKDIR /app
 COPY perudo-app/backend/pom.xml .
 COPY perudo-app/backend/src ./src
 
+# Copy frontend dist into backend resources
+COPY --from=frontend-build /app/dist ./src/main/resources/public
+
 RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:17-jre-alpine
@@ -20,7 +23,6 @@ FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
 COPY --from=backend-build /app/target/perudo-backend-1.0.0.jar app.jar
-COPY --from=frontend-build /app/dist ./public
 
 EXPOSE 8080
 
