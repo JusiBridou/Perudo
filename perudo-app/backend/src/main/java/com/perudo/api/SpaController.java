@@ -1,13 +1,20 @@
 package com.perudo.api;
 
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class SpaController {
+public class SpaController implements ErrorController {
 
-    @GetMapping(value = { "/", "/{x:[\\w\\-]+}", "/{x:^(?!api$).*$}/**" })
-    public String redirect() {
+    @RequestMapping("/error")
+    public String handleError() {
         return "forward:/index.html";
     }
+
+    public String getErrorPath() {
+        return "/error";
+    }
 }
+
+
