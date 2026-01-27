@@ -6,13 +6,8 @@ spring:
       allowed-origins: http://localhost:3000
       allowed-methods: GET,POST,PUT,DELETE,OPTIONS
       allowed-headers: "*"
-
-server:
-  port: 8080
-  servlet:
-    context-path: /api
-
-logging:
-  level:
+  web:
+    resources:
+      static-locations: classpath:/public/
     root: INFO
     com.perudo: DEBUG
