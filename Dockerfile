@@ -11,17 +11,9 @@ FROM node:18-alpine AS frontend-build
 
 WORKDIR /app
 
-COPY perudo-app/frontend/package*.json ./
+COPY perudo-app/frontend . 
 
-RUN npm install
-
-COPY perudo-app/frontend/src ./src
-COPY perudo-app/frontend/public ./public
-COPY perudo-app/frontend/index.html .
-COPY perudo-app/frontend/tsconfig.json .
-COPY perudo-app/frontend/vite.config.ts .
-
-RUN npm run build
+RUN npm install && npm run build
 
 FROM nginx:alpine
 
