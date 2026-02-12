@@ -15,7 +15,11 @@ import java.nio.charset.StandardCharsets;
 @Controller
 public class SpaController {
 
-    @GetMapping(value = "/", produces = MediaType.TEXT_HTML_VALUE)
+    @GetMapping(value = {
+            "/",
+            "/{path:^(?!api$)[^\\.]*}",
+            "/**/{path:^(?!api$)[^\\.]*}"
+    }, produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public String index() throws IOException {
         Resource resource = new ClassPathResource("public/index.html");
