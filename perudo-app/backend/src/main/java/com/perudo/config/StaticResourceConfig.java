@@ -17,7 +17,7 @@ public class StaticResourceConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         logger.info("Configuring static resource handlers");
         
-        // Mapper /assets/** avec la PLUS HAUTE priorité
+        // CRITICAL: Assets MUST be served with highest priority
         registry.addResourceHandler("/assets/**")
                 .addResourceLocations("classpath:/public/assets/")
                 .setCachePeriod(3600)
@@ -25,20 +25,21 @@ public class StaticResourceConfig implements WebMvcConfigurer {
         
         logger.info("Registered handler for /assets/** -> classpath:/public/assets/");
         
-        // Mapper les autres fichiers statiques à la racine (index.html, favicon, etc)
-        registry.addResourceHandler("/*.html", "/*.ico", "/*.png", "/*.jpg", "/*.css", "/*.js")
+        // Serve all static files from /public/
+        registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/public/")
                 .setCachePeriod(3600)
                 .resourceChain(false);
         
-        logger.info("Registered handler for static files at root -> classpath:/public/");
+        logger.info("Registered handler for /** -> classpath:/public/");
     }
     
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        // Forward root to index.html
-        registry.addViewController("/").setViewName("forward:/index.html");
-        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        logger.info("Configured view controller for / -> forward:/index.html");
+        // SPA fallback: any non-existent route goes to index.html
+        // But this has LOWER priority than ResourceHandlers
+        registry.addViewController("/{spring:[^\\.]*}").setViewName("forward:/index.html");
+        registry.setOrder(Ordered.LOWEST_PRECEDENCE);
+        logger.info("Configured SPA fallback controller");
     }
 }
