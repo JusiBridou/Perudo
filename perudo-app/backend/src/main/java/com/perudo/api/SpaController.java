@@ -8,8 +8,8 @@ public class SpaController {
 
     @RequestMapping({
             "/",
-            "/{path:[^\\.]*}",
-            "/{path:[^\\.]*}/**"
+            "/{path:^(?!api|assets$)[^\\.]*}",
+            "/{path:^(?!api|assets$)[^\\.]*}/**"
     })
     public String index() {
         // Let Spring serve index.html as a static resource.
