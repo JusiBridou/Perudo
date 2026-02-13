@@ -4,9 +4,6 @@ spring:
   web:
     resources:
       static-locations: classpath:/public/
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
   webflux:
     cors:
       allowed-origins: http://localhost:3000,http://localhost:8080
